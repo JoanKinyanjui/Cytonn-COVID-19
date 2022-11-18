@@ -1,14 +1,16 @@
 import logo from './logo.svg';
+import React,{useEffect, useState} from 'react'
 import './App.css';
 import Home from './Components/Home';
 
 function App() {
+
+
   return (
-    <div className="App">
      <div>
       <Home />
      </div>
-    </div>
+  
   );
 }
 

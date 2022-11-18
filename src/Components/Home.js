@@ -1,12 +1,15 @@
-import React from 'react';
+import React,{useEffect, useState} from 'react';
 import axios from 'axios';
 import Statistics from './Statistics';
+import Graph from './Graph';
 
 function Home() {
     const [countries,setCountries] = React.useState([]);
     const [statistics,setStatistics] =React.useState([]);
     const [history,setHistory]= React.useState([]);
-//getCountries from the api
+
+useEffect(()=>{
+    //getCountries from the api
 async function getCountries(){
     const options = {
         method: 'GET',
@@ -23,10 +26,10 @@ async function getCountries(){
 
  }
 
-//  getCountries();
+ getCountries();
 
  //get statistics from the api...
- async function getStatistics(){
+  async function getStatistics(){
     const options = {
         method: 'GET',
         url: 'https://covid-193.p.rapidapi.com/statistics',
@@ -37,12 +40,12 @@ async function getCountries(){
       };
       
      const response = await axios.request(options)
-     console.log(response.data.response)
      setStatistics(response.data.response)
+    await setData(response.data.response)
 
  }
 
-//  getStatistics();
+ getStatistics();
 
  //get history from the api...
  async function getHistory(){
@@ -58,20 +61,49 @@ async function getCountries(){
       
       
      const response = await axios.request(options)
-     console.log(response.data.response)
-     setHistory(response.data.response)
+     await setHistory(response.data.response)
+     console.log((response.data.response))
+     console.log(history)
 
  }
 
-//  getHistory();
+ getHistory();
+},[])    
+
+// Search Logic 
+const [searchValue,setSearchValue] =useState('');
+const [data,setData] = useState([]);
+const onHandleChange = async(e)=>{
+  setSearchValue(e.target.value)
+if(searchValue == ''){
+  return data
+}else{
+  const filteredResult = await  statistics.filter(item=> item.country.toLowerCase().includes(e.target.value.toLowerCase()))
+  await setData(filteredResult)
+}
+
+}
+  
 
 
   return (
     <div>
-        <p>Let's get the api for covid 19</p>
-        <Statistics />
+        <p>covid 19 statistics</p>
+        <div>
+        <form>
+<input 
+          type='text'
+          placeholder='search...'
+          onChange={onHandleChange}
+          value={searchValue}
+          
+          />
+</form>
+        </div>
+        <Statistics  data={data}/>
+        <Graph  history={history}/>
     </div>
   )
 }
 
-export default Home
+export default Home;
