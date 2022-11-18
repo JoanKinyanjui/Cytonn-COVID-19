@@ -2,7 +2,6 @@ import React,{useEffect, useState} from 'react';
 import axios from 'axios';
 import Statistics from './Statistics';
 import Graph from './Graph';
-import GraphData from './GraphData';
 import { styled, alpha } from '@mui/material/styles';
 import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
@@ -11,6 +10,7 @@ import InputBase from '@mui/material/InputBase';
 // import SearchIcon from '@mui/icons-material/Search';
 import { Typography } from '@mui/material';
 import '../global.css'
+import Nav from './Nav';
 
 function Home() {
     const [countries,setCountries] = React.useState([]);
@@ -123,11 +123,12 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
 
   return (
     <div >
-  <p className=' text-black grid justify-center text-bold text-3xl py-4 '>CORONA VIRUS STATISTICS</p>
+      <Nav />
     <div>
         </div>
 <div className='grid justify-items-end py-4'>
 <form >
+  <label>search:</label>
 <input 
 className='px-3'
 style={{backgroundColor:"whiteSmoke",color:"black", borderRadius:"3px"}}
@@ -140,7 +141,6 @@ style={{backgroundColor:"whiteSmoke",color:"black", borderRadius:"3px"}}
 </form>
 </div>
         <Statistics  data={data}/>
-        <GraphData history={history} />
         <Graph  history={history} />
     </div>
   )

@@ -113,7 +113,7 @@ return casesArr;
     async function getTime(arr){
         const casesArr=[]
          await arr.forEach((item)=>{          
-        casesArr.unshift((item.time).slice(11,13))
+        casesArr.unshift((item.time).slice(11,16))
         })
         
         await setTime(casesArr)
@@ -224,7 +224,7 @@ const combined = {
 return (
   <>
       <Box className='w-screen '>
-      <AppBar position="static" style={{backgroundColor:"black",paddingTop:"2rem",paddingBottom:"1rem"}} >
+      <AppBar position="static" style={{backgroundColor:"black",paddingTop:"1rem",paddingBottom:"1rem"}} >
         <Tabs
           value={value}
           onChange={handleChange}
