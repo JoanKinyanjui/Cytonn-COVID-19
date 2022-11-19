@@ -113,16 +113,19 @@ export default function Statistics({data}) {
   };
 
   return (
-    <Paper sx={{ width: '100%', overflow: 'hidden' }}>
+    <Paper sx={{ width: '100%', overflow: 'hidden' }} className=" py-4 md:py-8">
       <TableContainer sx={{ maxHeight: '640px' }}>
         <Table stickyHeader aria-label="sticky table">
           <TableHead>
-            <TableRow>
+            <TableRow 
+                  // sx={{ '&:first-child ': { border: "3px" ,position: "sticky", left: 0,color:"green"} }}
+                  >
               {columns.map((column) => (
                 <TableCell
                   key={column.id}
                   align={column.align}
                   style={{ minWidth: column.minWidth,fontWeight:"bold" }}
+            
                 >
                   {column.label}
                 </TableCell>
@@ -136,9 +139,9 @@ export default function Statistics({data}) {
                 return (
                     <TableRow
                     key={row.country}
-                    sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
+                    sx={{ '&:last-child td, &:last-child th': { border: 0} }}
                   >
-                    <TableCell component="th" scope="row">
+                    <TableCell component="th" scope="row" style={{    position: "sticky",left: 0,background: "white",borderRight: "2px solid grey"}}>
                       {row.country}
                     </TableCell>
                     <TableCell align="right">{row.cases['1M_pop']}</TableCell>
