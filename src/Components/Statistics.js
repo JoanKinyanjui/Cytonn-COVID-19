@@ -113,7 +113,7 @@ export default function Statistics({data}) {
   };
 
   return (
-    <Paper sx={{ width: '100%', overflow: 'hidden' }} className=" py-4 md:py-8">
+    <Paper sx={{ width: '100%', overflow: 'hidden' }} className=" py-8 md:py-16">
       <TableContainer sx={{ maxHeight: '640px' }}>
         <Table stickyHeader aria-label="sticky table">
           <TableHead>

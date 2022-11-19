@@ -12,6 +12,7 @@ import Typography from '@mui/material/Typography';
 import Box from '@mui/material/Box';
 import '../global.css'
 import { getAllByAltText } from '@testing-library/react';
+import { Container } from '@mui/system';
 
 ChartJS.register(
   Title, Tooltip, LineElement, Legend,
@@ -52,7 +53,7 @@ function a11yProps(index) {
 }
 
 
-function Graph({history}) {
+function Graph({history,time,cases,deaths,tests,getAll}) {
 
   //Tabs implementation
   const theme = useTheme();
@@ -65,64 +66,6 @@ function Graph({history}) {
   const handleChangeIndex = (index) => {
     setValue(index);
   };
-  const [cases,setCases]= useState([]);
-  const [deaths,setDeaths]= useState([]);
-  const [tests,setTests]= useState([]);
-  const [time,setTime]= useState([]);
-
-  const getAll =()=>{
-    getCasesArr(history)
-    getTestsArr(history)       
-    getDeathsArr(history)
-    getTime(history)
-  }
-
-
- //All
-// get Cases Array
-async function getCasesArr(arr){
-  const casesArr=[]
-  await arr.forEach((item)=>{
-    console.log(item.cases.total)
-  casesArr.unshift(item.cases.total)
-  })
-setCases(casesArr)
-  console.log(cases)
-return casesArr;
-}   
-//Get Tests
-async function getTestsArr(arr){
-  const casesArr=[]
-   await arr.forEach((item)=>{
-  casesArr.unshift(item.tests.total)
-  })
-  
-  await setTests(casesArr)
-  // console.log(tests)
-  return casesArr;
-      }
-//Get Deaths
-async function getDeathsArr(arr){
-      const casesArr=[]
-       await arr.forEach((item)=>{
-      casesArr.unshift(item.deaths.total)
-      })
-      
-      await setDeaths(casesArr)
-      // console.log(deaths)
-      return casesArr;
-          }
-//Get Labels Array(Time)
-async function getTime(arr){
-  const casesArr=[]
-   await arr.forEach((item)=>{          
-  casesArr.unshift((item.time).slice(11,16))
-  })
-  
-  await setTime(casesArr)
-  console.log(time)
-  return casesArr;
-      }          
 
 
 const casesData = {
@@ -223,7 +166,8 @@ const combined = {
           
 return (
   <>
-  <button onClick={getAll}>Get DATA</button>
+  <br />
+
       <Box className='w-screen '>
       <AppBar position="static" style={{backgroundColor:"black",paddingTop:"1rem",paddingBottom:"1rem"}} >
         <Tabs
@@ -245,6 +189,7 @@ return (
         index={value}
         onChangeIndex={handleChangeIndex}
       >
+          <Container maxWidth="xxl">
         <TabPanel value={value} index={0} dir={theme.direction}>
         <Line data={casesData}></Line>
         </TabPanel>
@@ -257,10 +202,11 @@ return (
         <TabPanel value={value} index={3} dir={theme.direction}>
         <Line data={combined}></Line>
         </TabPanel>
+        </Container>
       </SwipeableViews>
     </Box>
 
-  
+    
     </>
   );
 }
