@@ -87,13 +87,17 @@ const [deaths,setDeaths]= useState([]);
 const [tests,setTests]= useState([]);
 const [time,setTime]= useState([]);
 
+const getBothAll =()=>{
+  getAll();
+  getAll()
+}
+
 const getAll =()=>{
   getCasesArr(history)
   getTestsArr(history)       
   getDeathsArr(history)
   getTime(history)
   getAllHourly()
-  
   
 }
 const getAllHourly = async()=>{
@@ -228,12 +232,12 @@ function hourlyCase(){
      <>
 <Router>
 <div className='App'>
-<Nav getAll={getAll} />
+<Nav getAll={getBothAll} />
   <Routes>
     <Route exact path='/' element={<Home data={data} history={history} onHandleChange={onHandleChange} searchValue={searchValue} onSubmitHandler={onSubmitHandler} />}/>
 
 
-    <Route exact path='/graph'  element={ <Graph  history={history} time={time} tests={tests} cases={cases} deaths={deaths} getAll={getAll} country={country}/>} />
+    <Route exact path='/graph'  element={ <Graph  history={history} time={hourlyTime} tests={hourlyTests} cases={hourlyCases} deaths={hourlyDeaths} getAll={getAll} country={country}/>} />
 
 
     </Routes>
