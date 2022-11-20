@@ -12,7 +12,7 @@ import { Container, Typography } from '@mui/material';
 import '../global.css'
 import Nav from './Nav';
 
-function Home({data,searchValue,onHandleChange}) {
+function Home({data,searchValue,onHandleChange,onSubmitHandler}) {
 
 
   return (
@@ -20,7 +20,7 @@ function Home({data,searchValue,onHandleChange}) {
     <Container maxWidth="xxl">
        
 <div className='w-screen grid justify-items-center md:justify-items-end pt-8 md:pt-16 h-max pb-4 md:pb-8'>
-<form className=' md:w-96 lg:w-84 flex'>
+<form className=' md:w-96 lg:w-84 flex' onSubmit={onSubmitHandler}>
   <label><SearchIcon /></label>
 <input 
 className='px-3'
@@ -33,7 +33,7 @@ style={{backgroundColor:"whiteSmoke",color:"black", borderRadius:"3px"}}
           />
 </form>
 </div>
-        <Statistics  data={data}/>
+        <Statistics  data={data} />
         </Container>
     </>
   )

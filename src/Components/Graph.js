@@ -53,7 +53,7 @@ function a11yProps(index) {
 }
 
 
-function Graph({history,time,cases,deaths,tests,getAll}) {
+function Graph({history,time,cases,deaths,tests,getAll,country,loading}) {
 
   //Tabs implementation
   const theme = useTheme();
@@ -72,7 +72,7 @@ const casesData = {
     labels: time,
     datasets:[
       {
-        label:"total cases",
+        label:`total cases ${country}`,
         data:cases,
         // backgroundColor:'yellow',
         borderColor:'green',
@@ -90,7 +90,7 @@ const casesData = {
     labels: time,
     datasets:[
            {
-        label:"total tests",
+        label:`total tests ${country}`,
         data:tests,
         // backgroundColor:'yellow',
         borderColor:'blue',
@@ -106,7 +106,7 @@ const casesData = {
         labels: time,
         datasets:[
           {
-        label:"total deaths",
+        label:`total deaths ${country}`,
         data: deaths,
         // backgroundColor:'yellow',
         borderColor:'red',
@@ -167,8 +167,7 @@ const combined = {
 return (
   <>
   <br />
-
-      <Box className='w-screen '>
+<Box className='w-screen '>
       <AppBar position="static" style={{backgroundColor:"black",paddingTop:"1rem",paddingBottom:"1rem"}} >
         <Tabs
           value={value}
@@ -184,12 +183,13 @@ return (
           <Tab label="Combined results" {...a11yProps(3)} />
         </Tabs>
       </AppBar>
+        <Container maxWidth="xxl">
       <SwipeableViews
         axis={theme.direction === 'rtl' ? 'x-reverse' : 'x'}
         index={value}
         onChangeIndex={handleChangeIndex}
       >
-          <Container maxWidth="xxl">
+        
         <TabPanel value={value} index={0} dir={theme.direction}>
         <Line data={casesData}></Line>
         </TabPanel>
@@ -202,11 +202,11 @@ return (
         <TabPanel value={value} index={3} dir={theme.direction}>
         <Line data={combined}></Line>
         </TabPanel>
-        </Container>
+      
       </SwipeableViews>
-    </Box>
-
-    
+        </Container>
+    </Box> 
+  
     </>
   );
 }
