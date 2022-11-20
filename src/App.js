@@ -21,7 +21,8 @@ useEffect(()=>{
   getTestsArr(history)       
   getDeathsArr(history)
   getTime(history)
-  alert('on moving to graphical statistics page kindly reclick it to populate the graph.Sorry for the bug')
+  alert('on moving to graphical statistics page kindly reclick graphical statistics to populate the graph.Sorry for the bug')
+  
 
 },[])    
 
@@ -88,10 +89,6 @@ const [deaths,setDeaths]= useState([]);
 const [tests,setTests]= useState([]);
 const [time,setTime]= useState([]);
 
-const getBothAll =()=>{
-  getAll();
-  getAll()
-}
 
 const getAll =()=>{
   getCasesArr(history)
@@ -99,6 +96,7 @@ const getAll =()=>{
   getDeathsArr(history)
   getTime(history)
   getAllHourly()
+
   
 }
 const getAllHourly = async()=>{
@@ -233,7 +231,7 @@ function hourlyCase(){
      <>
 <Router>
 <div className='App'>
-<Nav getAll={getBothAll} />
+<Nav getAll={getAll} />
   <Routes>
     <Route exact path='/' element={<Home data={data} history={history} onHandleChange={onHandleChange} searchValue={searchValue} onSubmitHandler={onSubmitHandler} />}/>
 
