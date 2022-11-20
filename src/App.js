@@ -21,6 +21,7 @@ useEffect(()=>{
   getTestsArr(history)       
   getDeathsArr(history)
   getTime(history)
+  alert('on moving to graphical statistics page kindly reclick it to populate the graph.Sorry for the bug')
 
 },[])    
 
